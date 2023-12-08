@@ -1,5 +1,5 @@
-import ConversationSection from "./ConversationsSection";
-import NotesSection from "./NotesSection";
+import ConversationSection from "./Sections/ConversationsSection";
+import NotesSection from "./Sections/NotesSection";
 
 export default function LeftSidebar() {
   return (
