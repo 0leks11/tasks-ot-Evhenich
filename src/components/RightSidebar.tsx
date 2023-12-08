@@ -1,7 +1,5 @@
 import CollectionItem from "./Sections/CollectionItem";
-import CollectionsSection from "./Sections/CollectionsSection";
 import MyLibraryItem from "./Sections/MyLibraryItem";
-import MyLibrarySection from "./Sections/MyLibrarySection";
 import Section from "./Sections/Section";
 
 const myLibraryItems = [

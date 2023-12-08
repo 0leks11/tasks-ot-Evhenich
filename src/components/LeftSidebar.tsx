@@ -1,7 +1,5 @@
 import ConversationItem from "./Sections/ConversationItem";
-import ConversationSection from "./Sections/ConversationsSection";
 import NotesItem from "./Sections/NotesItem";
-import NotesSection from "./Sections/NotesSection";
 import Section from "./Sections/Section";
 
 const conversations = [
