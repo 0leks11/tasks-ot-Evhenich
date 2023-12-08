@@ -22,20 +22,17 @@ export default function ConversationSection() {
   ];
 
   return (
-    <div className="h-[50%] bg-white overflow-auto">
-      {conversations.map((conversation) => (
-        // <li key={conversation.id}>
-        //   <ConversationItem
-        //     title={conversation.title}
-        //     isActive={conversation.id === 1} // Example condition for active state
-        //   />
-        // </li>
-        <ConversationItem
-          key={conversation.id}
-          title={conversation.title}
-          isActive={conversation.id === 1} // Example condition for active state
-        />
-      ))}
+    <div className="flex flex-col h-[50%] bg-white">
+      <h1 className="p-2 text-black font-bold">Conversations</h1>
+      <div className="flex-grow overflow-auto">
+        {conversations.map((conversation) => (
+          <ConversationItem
+            key={conversation.id}
+            title={conversation.title}
+            isActive={conversation.id === 1} // Example condition for active state
+          />
+        ))}
+      </div>
     </div>
   );
 }
