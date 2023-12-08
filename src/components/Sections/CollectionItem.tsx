@@ -1,4 +1,8 @@
-const CollectionItem = ({ title }) => {
+export interface CollectionItemProps {
+  title: string;
+}
+
+const CollectionItem = ({ title }: CollectionItemProps) => {
   return (
     <div className="group flex flex-row items-center md:pl-4 hover:bg-violet-100 py-2 cursor-pointer">
       <svg
