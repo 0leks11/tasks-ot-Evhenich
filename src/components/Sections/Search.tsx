@@ -1,6 +1,6 @@
 const Search = ({}) => {
   return (
-    <div className="relative">
+    <div className="relative px-2 py-2">
       <input
         type="search"
         className="block w-full pl-4 pr-10 py-2 border-2 border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 sm:text-sm transition duration-150 ease-in-out"
