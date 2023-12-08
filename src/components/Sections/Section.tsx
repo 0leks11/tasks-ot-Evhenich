@@ -1,6 +1,18 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
-export default function Section({ children, title, header, footer }) {
+export interface SectionProps {
+  children: ReactNode;
+  title: string;
+  header?: ReactNode;
+  footer?: ReactNode;
+}
+
+export default function Section({
+  children,
+  title,
+  header,
+  footer,
+}: SectionProps) {
   return (
     <div className="flex flex-col h-[50%] bg-white">
       <h1 className="p-2 text-black font-bold">{title}</h1>
