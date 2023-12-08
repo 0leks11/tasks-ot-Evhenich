@@ -5,7 +5,8 @@ export default function CollectionsSection() {
   const collections = [
     { id: 1, title: "What is NIH" },
     { id: 2, title: "Who gets type 2 diabetes" },
-    // Add more collections here
+    { id: 3, title: "Something wrong with me" },
+    { id: 4, title: "How can I loose weight" },
   ];
 
   return (

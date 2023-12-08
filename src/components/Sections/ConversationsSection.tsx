@@ -2,16 +2,27 @@ import { useState } from "react";
 import ConversationItem from "./ConversationItem";
 
 export default function ConversationSection() {
-  // const [picked, setPicked] = useState(null);
   // Dummy data for conversation titles
   const conversations = [
     { id: 1, title: "What is NIH" },
-    { id: 2, title: "Who gets type 2 diabetes" },
-    // Add more conversations here
+    { id: 2, title: "How to Bake a Cake" },
+    { id: 3, title: "Introduction to JavaScript" },
+    { id: 4, title: "Exploring National Parks" },
+    { id: 5, title: "The Art of Photography" },
+    { id: 6, title: "History of Space Exploration" },
+    { id: 7, title: "Healthy Eating Habits" },
+    { id: 8, title: "Traveling on a Budget" },
+    { id: 9, title: "Beginner's Guide to Yoga" },
+    { id: 10, title: "Famous Works of Literature" },
+    { id: 11, title: "Mastering Chess Strategies" },
+    { id: 12, title: "DIY Home Improvement Projects" },
+    { id: 13, title: "The World of Birds" },
+    { id: 14, title: "Learning a New Language" },
+    { id: 15, title: "Financial Planning 101" },
   ];
 
   return (
-    <div className="h-[50%] bg-white">
+    <div className="h-[50%] bg-white overflow-auto">
       {conversations.map((conversation) => (
         <li key={conversation.id}>
           <ConversationItem
