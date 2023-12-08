@@ -24,12 +24,17 @@ export default function ConversationSection() {
   return (
     <div className="h-[50%] bg-white overflow-auto">
       {conversations.map((conversation) => (
-        <li key={conversation.id}>
-          <ConversationItem
-            title={conversation.title}
-            isActive={conversation.id === 1} // Example condition for active state
-          />
-        </li>
+        // <li key={conversation.id}>
+        //   <ConversationItem
+        //     title={conversation.title}
+        //     isActive={conversation.id === 1} // Example condition for active state
+        //   />
+        // </li>
+        <ConversationItem
+          key={conversation.id}
+          title={conversation.title}
+          isActive={conversation.id === 1} // Example condition for active state
+        />
       ))}
     </div>
   );
