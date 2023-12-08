@@ -11,15 +11,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Main container */}
       <div className="flex flex-col md:flex-row h-screen bg-gray-100">
-        {/* Left sidebar - hidden on small screens */}
         <LeftSidebar />
-
-        {/* Center content */}
         <CenterContent />
-
-        {/* Right sidebar - hidden on medium screens */}
         <RightSidebar />
       </div>
     </>
