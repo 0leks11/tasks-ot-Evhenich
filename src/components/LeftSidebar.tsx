@@ -1,5 +1,6 @@
 import ConversationItem from "./Sections/ConversationItem";
 import NotesItem from "./Sections/NotesItem";
+import Search from "./Sections/Search";
 import Section from "./Sections/Section";
 
 const conversations = [
@@ -45,7 +46,7 @@ export default function LeftSidebar() {
           />
         ))}
       </Section>
-      <Section title="Notes">
+      <Section title="Notes" header={<Search />}>
         {notes.map((note) => (
           <NotesItem
             key={note.id}

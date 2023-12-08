@@ -1,5 +1,6 @@
 import CollectionItem from "./Sections/CollectionItem";
 import MyLibraryItem from "./Sections/MyLibraryItem";
+import Search from "./Sections/Search";
 import Section from "./Sections/Section";
 
 const myLibraryItems = [
@@ -45,7 +46,7 @@ const collections = [
 export default function RightSidebar() {
   return (
     <div className="bg-green-500 w-full md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 p-4 hidden lg:block">
-      <Section title="Collections">
+      <Section title="Collections" header={<Search />}>
         {collections.map((collection) => (
           <CollectionItem
             key={collection.id}
@@ -54,7 +55,7 @@ export default function RightSidebar() {
           />
         ))}
       </Section>
-      <Section title="My Library">
+      <Section title="My Library" header={<Search />}>
         {myLibraryItems.map((item) => (
           <MyLibraryItem
             key={item.id}
