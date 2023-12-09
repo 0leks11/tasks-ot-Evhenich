@@ -51,7 +51,6 @@ export default function RightSidebar() {
           <CollectionItem
             key={collection.id}
             title={collection.title}
-            isActive={collection.id === 1}
           />
         ))}
       </Section>
@@ -60,7 +59,6 @@ export default function RightSidebar() {
           <MyLibraryItem
             key={item.id}
             title={item.title}
-            isActive={item.id === 1}
           />
         ))}
       </Section>

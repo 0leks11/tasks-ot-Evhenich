@@ -39,20 +39,12 @@ export default function LeftSidebar() {
     <div className="w-full md:w-1/4 lg:w-1/5 xl:w-1/4 2xl:w-1/7 p-4 hidden md:block">
       <Section title="Conversations">
         {conversations.map((conversation) => (
-          <ConversationItem
-            key={conversation.id}
-            title={conversation.title}
-            isActive={conversation.id === 1}
-          />
+          <ConversationItem key={conversation.id} title={conversation.title} />
         ))}
       </Section>
       <Section title="Notes" header={<Search />}>
         {notes.map((note) => (
-          <NotesItem
-            key={note.id}
-            title={note.title}
-            isActive={note.id === 1}
-          />
+          <NotesItem key={note.id} title={note.title} />
         ))}
       </Section>
     </div>
