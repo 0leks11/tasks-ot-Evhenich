@@ -10,15 +10,11 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("Successfull sign in", {
-        user,
-        account,
-        profile,
-        email,
-        credentials,
-      });
-      return true;
+    async jwt({ token, account }) {
+      if (account) {
+        token.access_token = account.access_token;
+      }
+      return token;
     },
   },
 });
