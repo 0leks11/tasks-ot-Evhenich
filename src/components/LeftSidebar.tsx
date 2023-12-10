@@ -1,7 +1,11 @@
+"use client";
+
+import { useSession } from "next-auth/react";
 import ConversationItem from "./Sections/ConversationItem";
 import NotesItem from "./Sections/NotesItem";
 import Search from "./Sections/Search";
 import Section from "./Sections/Section";
+import { useEffect } from "react";
 
 const conversations = [
   { id: 1, title: "What is NIH" },
@@ -35,6 +39,36 @@ const notes = [
 ];
 
 export default function LeftSidebar() {
+  const { data: session } = useSession();
+
+  console.log({ session });
+
+  // const fetchData = async () => {
+  //   if (session) {
+  //     const response = await fetch(
+  //       "https://registry-api-dev.syntheticabio.net/v1/conversations",
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         credentials: "include", // Important for including the session cookie
+  //         mode: "no-cors", // Adding no-cors mode
+  //       }
+  //     );
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       // ... handle the data
+  //       console.log({ data });
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
   return (
     <div className="w-full md:w-1/4 lg:w-1/5 xl:w-1/4 2xl:w-1/7 p-4 hidden md:block">
       <Section title="Conversations">
