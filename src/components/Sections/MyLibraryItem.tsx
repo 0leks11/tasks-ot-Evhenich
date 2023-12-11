@@ -1,10 +1,12 @@
+import SectionItem from "./SectionItem";
+
 export interface MyLibraryItemProps {
   title: string;
 }
 
 const MyLibraryItem = ({ title }: MyLibraryItemProps) => {
   return (
-    <div className="group flex flex-row items-center md:pl-4 hover:bg-violet-100 py-2 cursor-pointer">
+    <SectionItem title={title}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -21,10 +23,7 @@ const MyLibraryItem = ({ title }: MyLibraryItemProps) => {
         <path d="M19 16h-12a2 2 0 0 0 -2 2"></path>
         <path d="M9 8h6"></path>
       </svg>
-      <span className="text-black truncate max-w-[calc(100%-90px)] w-full relative xl:left-6 lg:left-4 md:left-3 left-2 group-hover:font-medium">
-        {title}
-      </span>
-    </div>
+    </SectionItem>
   );
 };
 
