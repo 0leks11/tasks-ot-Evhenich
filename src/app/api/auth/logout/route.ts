@@ -5,7 +5,6 @@ import { NextResponse, NextRequest } from "next/server";
 const handler = async (request: NextRequest) => {
   const token = await getToken({ req: request });
   const session = await getServerSession();
-  console.log("handler: ", token?.id_token);
   if (session && token) {
     // Signed in
     const res = await fetch(
