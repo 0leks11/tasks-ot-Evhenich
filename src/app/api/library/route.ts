@@ -9,6 +9,7 @@ const handler = async (request: NextRequest) => {
       `${process.env.API_ROUTE}/documents/search?` +
         new URLSearchParams({
           size: "20",
+          isDefault: "true",
         }),
       {
         headers: {
