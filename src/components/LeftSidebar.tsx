@@ -5,6 +5,7 @@ import ConversationItem from "./Sections/ConversationItem";
 import NotesItem from "./Sections/NotesItem";
 import Section from "./Sections/Section";
 import { useState } from "react";
+import { renderSectionContent } from "@/utils/helpers";
 
 type Conversation = {
   id: string;
@@ -21,20 +22,19 @@ export default function LeftSidebar() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [notes, setNotes] = useState<Note[]>([]);
 
-  useDataFetching(setConversations, "conversations");
-  useDataFetching(setNotes, "notes");
+  const { loading: convLoading } = useDataFetching(
+    setConversations,
+    "conversations"
+  );
+  const { loading: notesLoading } = useDataFetching(setNotes, "notes");
 
   return (
     <div className="w-full md:w-1/4 lg:w-1/5 xl:w-1/4 2xl:w-1/7 p-4 hidden md:block">
       <Section title="Conversations">
-        {conversations.map((conversation) => (
-          <ConversationItem key={conversation.id} title={conversation.name} />
-        ))}
+        {renderSectionContent(convLoading, conversations, ConversationItem)}
       </Section>
       <Section title="Notes">
-        {notes.map((note) => (
-          <NotesItem key={note.id} title={note.name} />
-        ))}
+        {renderSectionContent(notesLoading, notes, NotesItem)}
       </Section>
     </div>
   );

@@ -5,6 +5,7 @@ import CollectionItem from "./Sections/CollectionItem";
 import MyLibraryItem from "./Sections/MyLibraryItem";
 import Section from "./Sections/Section";
 import { useDataFetching } from "@/utils/hooks";
+import { renderSectionContent } from "@/utils/helpers";
 
 type LibraryItem = {
   id: string;
@@ -20,20 +21,19 @@ export default function RightSidebar() {
   const [collections, setCollections] = useState<Collection[]>([]);
   const [library, setLibrary] = useState<LibraryItem[]>([]);
 
-  useDataFetching(setCollections, "collections");
-  useDataFetching(setLibrary, "library");
+  const { loading: collectionsLoading } = useDataFetching(
+    setCollections,
+    "collections"
+  );
+  const { loading: libraryLoading } = useDataFetching(setLibrary, "library");
 
   return (
     <div className="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 p-4 hidden lg:block">
       <Section title="Collections">
-        {collections.map((collection) => (
-          <CollectionItem key={collection.id} title={collection.name} />
-        ))}
+        {renderSectionContent(collectionsLoading, collections, CollectionItem)}
       </Section>
       <Section title="My Library">
-        {library.map((item) => (
-          <MyLibraryItem key={item.id} title={item.name} />
-        ))}
+        {renderSectionContent(libraryLoading, library, MyLibraryItem)}
       </Section>
     </div>
   );
