@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import ConversationItem from "./Sections/ConversationItem";
 import NotesItem from "./Sections/NotesItem";
 import Search from "./Sections/Search";
@@ -60,7 +59,7 @@ export default function LeftSidebar() {
           <ConversationItem key={conversation.id} title={conversation.name} />
         ))}
       </Section>
-      <Section title="Notes" header={<Search />}>
+      <Section title="Notes">
         {notes.map((note) => (
           <NotesItem key={note.id} title={note.name} />
         ))}
