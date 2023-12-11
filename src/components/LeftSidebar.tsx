@@ -7,26 +7,20 @@ import Search from "./Sections/Search";
 import Section from "./Sections/Section";
 import { useEffect, useState } from "react";
 
-const notes = [
-  { id: 1, title: "A couple of words" },
-  { id: 2, title: "Another example" },
-  { id: 3, title: "Lorem Ipsum" },
-  { id: 4, title: "Random Text" },
-  { id: 5, title: "Placeholder Data" },
-  { id: 6, title: "Sample Content" },
-  { id: 7, title: "Mock Data" },
-  { id: 8, title: "Test Item" },
-  { id: 9, title: "Demo Text" },
-  { id: 10, title: "Placeholder Title" },
-];
-type Conversations = {
+type Conversation = {
   id: string;
   name: string;
   updatedAt: string;
 };
 
+type Note = {
+  id: string;
+  name: string;
+};
+
 export default function LeftSidebar() {
-  const [conversations, setConversations] = useState<Conversations[]>([]);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -41,7 +35,22 @@ export default function LeftSidebar() {
         console.log("Error with fetchConversations");
       }
     };
+
+    const fetchNotes = async () => {
+      const res = await fetch("api/notes", {
+        credentials: "include",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        setNotes(data.data.content);
+      } else {
+        console.log("Error with fetchNotes");
+      }
+    };
+
     fetchConversations();
+    fetchNotes();
   }, []);
 
   return (
@@ -53,7 +62,7 @@ export default function LeftSidebar() {
       </Section>
       <Section title="Notes" header={<Search />}>
         {notes.map((note) => (
-          <NotesItem key={note.id} title={note.title} />
+          <NotesItem key={note.id} title={note.name} />
         ))}
       </Section>
     </div>
