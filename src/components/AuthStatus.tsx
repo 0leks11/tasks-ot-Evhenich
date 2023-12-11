@@ -1,5 +1,6 @@
 "use client";
 
+import { Session } from "next-auth";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect } from "react";
 
@@ -19,7 +20,7 @@ async function keycloakSessionSignin() {
   }
 }
 
-function useHandleAuthErrors(session, status) {
+function useHandleAuthErrors(session: Session | null, status: string) {
   useEffect(() => {
     if (status !== "loading" && session?.error === "RefreshAccessTokenError") {
       signOut({ callbackUrl: "/" });
@@ -27,7 +28,7 @@ function useHandleAuthErrors(session, status) {
   }, [session, status]);
 }
 
-function AuthActionButton({ session }) {
+function AuthActionButton({ session }: { session: Session | null }) {
   const handleLogout = async () => {
     await keycloakSessionLogOut();
     signOut({ callbackUrl: "/" });
@@ -66,8 +67,12 @@ export default function AuthStatus() {
 
   return (
     <div className="flex flex-col">
-      <span className="text-black">{session ? "Logged in as" : "Not logged in."}</span>
-      {session && <span className="text-black">{session.user.email}</span>}
+      <span className="text-black">
+        {session ? "Logged in as:" : "Not logged in."}
+      </span>
+      {session && (
+        <span className="text-black font-bold">{session?.user?.email}</span>
+      )}
       <AuthActionButton session={session} />
     </div>
   );
