@@ -1,23 +1,28 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse, NextRequest } from "next/server";
 
-const handler = async (req: NextRequest) => {
-  // If you don't have NEXTAUTH_SECRET set, you will have to pass your secret as `secret` to `getToken`
-  const token = await getToken({ req });
+const handler = async (request: NextRequest) => {
+  const token = await getToken({ req: request });
   if (token) {
     // Signed in
-    const res = await fetch(`${process.env.API_ROUTE}/document-collections/search`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token.access_token,
-      },
-    });
-    const result = await res.json();
-    console.log({ result });
+    const res = await fetch(
+      `${process.env.API_ROUTE}/document-collections/search?` +
+        new URLSearchParams({
+          size: "20",
+        }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token.access_token,
+        },
+      }
+    );
+    const data = await res.json();
+    return NextResponse.json({ data }, { status: 200 });
   } else {
     // Not Signed in
+    return NextResponse.json({}, { status: 401 });
   }
-  return NextResponse.json({}, { status: 200 });
 };
 
 export { handler as GET };

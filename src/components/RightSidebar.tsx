@@ -1,65 +1,62 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import CollectionItem from "./Sections/CollectionItem";
 import MyLibraryItem from "./Sections/MyLibraryItem";
-import Search from "./Sections/Search";
 import Section from "./Sections/Section";
 
-const myLibraryItems = [
-  { id: 1, title: "What is NIH" },
-  { id: 2, title: "How to Bake a Cake" },
-  { id: 3, title: "Introduction to JavaScript" },
-  { id: 4, title: "Exploring National Parks" },
-  { id: 5, title: "The Art of Photography" },
-  { id: 6, title: "History of Space Exploration" },
-  { id: 7, title: "Healthy Eating Habits" },
-  { id: 8, title: "Traveling on a Budget" },
-  { id: 9, title: "Beginner's Guide to Yoga" },
-  { id: 10, title: "Famous Works of Literature" },
-  { id: 11, title: "Mastering Chess Strategies" },
-  { id: 12, title: "DIY Home Improvement Projects" },
-  { id: 13, title: "The World of Birds" },
-  { id: 14, title: "Learning a New Language" },
-  { id: 15, title: "Financial Planning 101" },
-  { id: 16, title: "A couple of words" },
-  { id: 17, title: "Another example" },
-  { id: 18, title: "Lorem Ipsum" },
-  { id: 19, title: "Random Text" },
-  { id: 20, title: "Placeholder Data" },
-];
+type LibraryItem = {
+  id: string;
+  name: string;
+};
 
-const collections = [
-  { id: 1, title: "A collection" },
-  { id: 2, title: "Another collection" },
-  { id: 3, title: "Sample Collection" },
-  { id: 4, title: "Collection 1" },
-  { id: 5, title: "Collection 2" },
-  { id: 6, title: "Collection XYZ" },
-  { id: 7, title: "My Favorite Collection" },
-  { id: 8, title: "Test Collection" },
-  { id: 9, title: "Demo Collection" },
-  { id: 10, title: "Placeholder Collection" },
-  { id: 11, title: "Collection of Things" },
-  { id: 12, title: "Collection ABC" },
-  { id: 13, title: "Collection XYZ" },
-  { id: 14, title: "Collection 123" },
-];
+type Collection = {
+  id: string;
+  name: string;
+};
 
 export default function RightSidebar() {
+  const [collections, setCollections] = useState<Collection[]>([]);
+  const [library, setLibrary] = useState<LibraryItem[]>([]);
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      const res = await fetch("api/collections", {
+        credentials: "include",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setCollections(data.data.content);
+      } else {
+        console.log("Error with fetchCollections");
+      }
+    };
+
+    const fetchLibrary = async () => {
+      const res = await fetch("api/library", {
+        credentials: "include",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setLibrary(data.data.content);
+      } else {
+        console.log("Error with fetchLibrary");
+      }
+    };
+
+    fetchCollections();
+    fetchLibrary();
+  }, []);
   return (
     <div className="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 p-4 hidden lg:block">
       <Section title="Collections">
         {collections.map((collection) => (
-          <CollectionItem
-            key={collection.id}
-            title={collection.title}
-          />
+          <CollectionItem key={collection.id} title={collection.title} />
         ))}
       </Section>
       <Section title="My Library">
-        {myLibraryItems.map((item) => (
-          <MyLibraryItem
-            key={item.id}
-            title={item.title}
-          />
+        {library.map((item) => (
+          <MyLibraryItem key={item.id} title={item.title} />
         ))}
       </Section>
     </div>
