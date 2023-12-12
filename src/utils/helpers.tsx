@@ -37,3 +37,34 @@ export async function keycloakSessionSignin() {
     signIn();
   }
 }
+
+import { getToken } from "next-auth/jwt";
+import { NextResponse, NextRequest } from "next/server";
+
+export async function fetchFromAPI(
+  request: NextRequest,
+  apiEndpoint: string,
+  queryParams: URLSearchParams
+) {
+  const token = await getToken({ req: request });
+  if (!token) {
+    return NextResponse.json({}, { status: 401 });
+  }
+
+  const url =
+    `${process.env.API_ROUTE}/${apiEndpoint}?` +
+    new URLSearchParams(queryParams);
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token.access_token,
+    },
+  });
+
+  if (!res.ok) {
+    return NextResponse.json({ error: res.statusText }, { status: res.status });
+  }
+
+  const data = await res.json();
+  return NextResponse.json({ data }, { status: 200 });
+}
