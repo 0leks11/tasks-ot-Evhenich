@@ -44,7 +44,7 @@ import { NextResponse, NextRequest } from "next/server";
 export async function fetchFromAPI(
   request: NextRequest,
   apiEndpoint: string,
-  queryParams: URLSearchParams
+  queryParams: Record<string, string>
 ) {
   const token = await getToken({ req: request });
   if (!token) {
