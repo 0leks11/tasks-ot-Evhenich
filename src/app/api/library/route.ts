@@ -18,6 +18,11 @@ const handler = async (request: NextRequest) => {
         },
       }
     );
+    if (!res.ok)
+      return NextResponse.json(
+        { error: res.statusText },
+        { status: res.status }
+      );
     const data = await res.json();
     return NextResponse.json({ data }, { status: 200 });
   } else {
