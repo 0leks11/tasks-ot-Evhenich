@@ -11,7 +11,7 @@ export const useDataFetching = (setData: any, endpoint: string) => {
           credentials: "include",
         });
         if (!res.ok) {
-          if (res.status === 401) {
+          if (res.status === 401 || res.status === 403) {
             keycloakSessionLogOut();
           } else {
             throw new Error("Failed to fetch data");
