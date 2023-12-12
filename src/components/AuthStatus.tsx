@@ -1,24 +1,9 @@
 "use client";
 
+import { keycloakSessionLogOut, keycloakSessionSignin } from "@/utils/helpers";
 import { Session } from "next-auth";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect } from "react";
-
-async function keycloakSessionLogOut() {
-  try {
-    await fetch(`/api/auth/logout`, { method: "GET" });
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-async function keycloakSessionSignin() {
-  try {
-    await fetch(`/api/auth/signin`, { method: "GET" });
-  } catch (err) {
-    console.error(err);
-  }
-}
 
 function useHandleAuthErrors(session: Session | null, status: string) {
   useEffect(() => {
@@ -29,27 +14,17 @@ function useHandleAuthErrors(session: Session | null, status: string) {
 }
 
 function AuthActionButton({ session }: { session: Session | null }) {
-  const handleLogout = async () => {
-    await keycloakSessionLogOut();
-    signOut({ callbackUrl: "/" });
-  };
-
-  const handleLogin = async () => {
-    await keycloakSessionSignin();
-    signIn();
-  };
-
   return session ? (
     <button
       className="bg-black font-bold text-white py-1 px-2 rounded border border-gray-50"
-      onClick={handleLogout}
+      onClick={keycloakSessionLogOut}
     >
       Log out
     </button>
   ) : (
     <button
       className="bg-black font-bold text-white py-1 px-2 rounded border border-gray-50"
-      onClick={handleLogin}
+      onClick={keycloakSessionSignin}
     >
       Log in
     </button>

@@ -1,9 +1,11 @@
 import CenterContent from "@/components/CenterContent";
 import LeftSidebar from "@/components/LeftSidebar";
 import RightSidebar from "@/components/RightSidebar";
+import { getServerSession } from "next-auth";
 import Head from "next/head";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession();
   return (
     <>
       <Head>
@@ -12,9 +14,9 @@ export default function Home() {
       </Head>
 
       <div className="flex flex-col md:flex-row h-screen bg-gray-100">
-        <LeftSidebar />
+        {session && <LeftSidebar />}
         <CenterContent />
-        <RightSidebar />
+        {session && <RightSidebar />}
       </div>
     </>
   );
